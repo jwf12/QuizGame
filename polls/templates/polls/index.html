@@ -1,0 +1,26 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>Votaciones</title>
+</head>
+<body>
+<div class="question_container">   
+  
+    <div class= "questions_main">   
+    <h1>Preguntas:</h1>
+
+        {% if latest_questions %}
+            {% for question in latest_questions %}
+                <li><a href="{%url 'polls:numPreg' question.id%}">{{question.question_text}}</a></li>
+            {% endfor %}
+
+        {% endif %}
+    </div>
+</div> 
+</body>
+</html>
