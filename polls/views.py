@@ -1,8 +1,9 @@
-from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Question, Choice, Answer2, Category
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import generic
+
+from .models import Answer2, Category, Choice, Question
 
 
 def index (request):
