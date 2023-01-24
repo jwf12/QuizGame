@@ -8,12 +8,11 @@
     <h1>Preguntas:</h1>
 
         {% if latest_questions %}
-        {% for question in latest_questions %}
-            <li><a href="{% url 'polls:numPreg' question.id %}">{{ question.question_text }}</a></li>
-        {% empty %}
-            <p>No hay preguntas</p>
-        {% endfor %}
-
+            {% for question in latest_questions %}
+                <li><a href="{% url 'polls:numPreg' question.id %}">{{ question.question_text }}</a></li>
+            {% empty %}
+                <p>No hay preguntas</p>
+            {% endfor %}
         {% endif %}
     </div>
 </div>
