@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.views import generic
 
@@ -7,10 +7,11 @@ from .models import Answer2, Category, Choice, Question
 
 
 def index(request):
-    contexto = {}
-    questions = Question.objects.all()
-    contexto['latest_questions'] = questions
-    return render(request, 'polls/index.html', contexto)
+    categories = Category.objects.all()
+    context = {
+        'categories': categories
+    }
+    return render(request, 'polls/index.html', context=context)
 
 
 class QuestionDetailView(generic.DetailView):
