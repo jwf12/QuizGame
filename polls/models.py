@@ -4,7 +4,7 @@ class Category(models.Model):
     category_text = models.CharField(max_length=200)
 
 class Question(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null= True) 
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null= True, related_name='questions') 
     question_text= models.CharField(max_length=200)
     pub_date= models.DateTimeField(auto_now= True)
 
