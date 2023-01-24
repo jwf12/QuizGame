@@ -13,7 +13,6 @@ def index (request):
     return render(request, 'polls/index.html', contexto)
 
 
-
 class QuestionDetailView(generic.DetailView):
     model = Question
     template_name = "polls/answ.html"
