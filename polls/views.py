@@ -6,7 +6,7 @@ from django.views import generic
 from .models import Answer2, Category, Choice, Question
 
 
-def index (request):
+def index(request):
     contexto = {}
     questions = Question.objects.all()
     contexto['latest_questions'] = questions
@@ -29,7 +29,7 @@ def category_detail(request, category_id):
     return render(request, 'polls/answ.html', contexto)
 
 
-def results (request, question_id):
+def results(request, question_id):
     contexto = {}
     latest_questions = Question.objects.get(pk = question_id)
     contexto['latest_questions'] = latest_questions
