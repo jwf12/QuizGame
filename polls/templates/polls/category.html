@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}{{ category.category_text }}{% endblock %}
+
+{% block content %}
+<div class="question_container">   
+  
+    <div class= "questions_main">   
+    <h1>{{ category.category_text }}:</h1>
+    {% for question in category.questions.all %}
+        <li><a href="{% url 'polls:numPreg' question.id %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
