@@ -56,3 +56,9 @@ def vote(request, question_id):
             return redirect('polls:results', question_id=question_id)
         else:
             return redirect('polls:index')
+
+def category(request, category_id):
+    context = {
+        'categories': get_object_or_404(Category, id=category_id),
+    }
+    return render(request, 'polls/category.html', context=context)
