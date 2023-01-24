@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Question, Choice, Answer2
+from .models import Question, Choice, Answer2, Category
 from django.urls import reverse
 from django.views import generic
 
@@ -19,28 +19,24 @@ class QuestionDetailView(generic.DetailView):
     context_object_name = 'latest_questions'
 
 
+def category_detail(request, category_id):
+    contexto = {}
+    selected_category = Category.objects.get(pk = category_id)
+    contexto['selected_category'] = selected_category
 
-# def detailView (request, category_id):
-#     contexto = {}
-#     selected_category = Category.objects.get(pk = category_id)
-#     contexto['selected_category'] = selected_category
-
-#     c= Question.objects.filter(category = selected_category)
-#     contexto['cat_quest'] = c
-#     return render(request, 'polls/answ.html', contexto)
-
+    c= Question.objects.filter(category = selected_category)
+    contexto['cat_quest'] = c
+    return render(request, 'polls/answ.html', contexto)
 
 
+def results (request, question_id):
+    contexto = {}
+    latest_questions = Question.objects.get(pk = question_id)
+    contexto['latest_questions'] = latest_questions
 
-# def results (request, question_id):
-#     contexto = {}
-#     latest_questions = Question.objects.get(pk = question_id)
-#     contexto['latest_questions'] = latest_questions
-
-#     c= Choice.objects.filter(question = latest_questions)
-#     contexto['latest_ans'] = c
-#     return render(request, 'polls/results.html', contexto)
-
+    c= Choice.objects.filter(question = latest_questions)
+    contexto['latest_ans'] = c
+    return render(request, 'polls/results.html', contexto)
 
 
 def vote(request, question_id):
