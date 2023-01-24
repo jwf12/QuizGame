@@ -1,33 +1,33 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Question, Choice, Answer2
+from .models import Question, Choice, Answer2, Category
 from django.urls import reverse
 from django.views import generic
 
 
 def index (request):
     contexto = {}
-    n = Question.objects.all()
-    contexto['latest_questions'] = n
+    n = Category.objects.all()
+    contexto['all_category'] = n
     return render(request, 'polls/index.html', contexto)
 
 
 
-class DetailView(generic.DetailView):
-    model = Question
-    template_name = "polls/answ.html"
-    context_object_name = 'latest_questions'
+# class DetailView(generic.DetailView):
+#     model = Question
+#     template_name = "polls/answ.html"
+#     context_object_name = 'latest_questions'
 
 
 
-# def detailView (request, category_id):
-#     contexto = {}
-#     selected_category = Category.objects.get(pk = category_id)
-#     contexto['selected_category'] = selected_category
+def detailView (request, category_id):
+    contexto = {}
+    selected_category = Category.objects.get(pk = category_id)
+    contexto['selected_category'] = selected_category
 
-#     c= Question.objects.filter(category = selected_category)
-#     contexto['cat_quest'] = c
-#     return render(request, 'polls/answ.html', contexto)
+    c= Question.objects.filter(category = selected_category)
+    contexto['cat_questions'] = c
+    return render(request, 'polls/answ.html', contexto)
 
 
 

@@ -12,35 +12,36 @@
 </head>
 <body>
     
-    <div class="question_container"> 
-    <form action="{% url 'polls:vote' latest_questions.id%}" method='post'>{% csrf_token %}
-        <h1>{{latest_questions.question_text}}</h1>
-        <fieldset>
+    {% for question in cat_questions %}
+        <div class="question_container"> 
+        <form action="{% url 'polls:vote' latest_questions.id%}" method='post'>{% csrf_token %}
+            <h1>{{latest_questions.question_text}}</h1>
+            <fieldset>
 
-            
-            {% if error_massage %}
-                <p><strong>{{error_massage}}</strong></p>
-            {% endif %}
+                
+                {% if error_massage %}
+                    <p><strong>{{error_massage}}</strong></p>
+                {% endif %}
 
 
-            {% for choice in latest_questions.choice_set.all %}
-            
-            <input 
-                type="radio"
-                name="choice"
-                id="choice{{forloop.counter}}"
-                value="{{choice.id}}"
-            >
-            <label for="choice{{forloop.counter}}">
-                {{choice.choice_text}}
-            </label>
-            <br>
+                {% for choice in latest_questions.choice_set.all %}
+                
+                <input 
+                    type="radio"
+                    name="choice"
+                    id="choice{{forloop.counter}}"
+                    value="{{choice.id}}"
+                >
+                <label for="choice{{forloop.counter}}">
+                    {{choice.choice_text}}
+                </label>
+                <br>
 
-            {% endfor %}
-        </fieldset>
-        <input type="submit" value="Votar">
-    </form>
-
+                {% endfor %}
+            </fieldset>
+            <input type="submit" value="Votar">
+        </form>
+    {% endfor %}
 </div>
 </body>
 </html>

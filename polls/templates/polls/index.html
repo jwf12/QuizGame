@@ -12,11 +12,11 @@
 <div class="question_container">   
   
     <div class= "questions_main">   
-    <h1>Preguntas:</h1>
+    <h1>Categorias:</h1>
 
-        {% if latest_questions %}
-            {% for question in latest_questions %}
-                <li><a href="{%url 'polls:numPreg' question.id%}">{{question.question_text}}</a></li>
+        {% if all_category %}
+            {% for category in all_category %}
+                <li><a href="{%url 'polls:numPreg' category.id%}">{{category.category_text}}</a></li>
             {% endfor %}
 
         {% endif %}
