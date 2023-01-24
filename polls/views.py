@@ -55,4 +55,4 @@ def vote(request, question_id):
         if selected_choice.choice_text == right_ans.answer_text:
             return redirect('polls:results', question_id=question_id)
         else:
-            return HttpResponseRedirect(reverse('polls:index'))
+            return redirect('polls:index')
