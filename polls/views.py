@@ -40,16 +40,16 @@ class DetailView(generic.DetailView):
 #     c= Choice.objects.filter(question = latest_questions)
 #     contexto['latest_ans'] = c
 #     return render(request, 'polls/results.html', contexto)
-    
+
 
 
 def vote(request, question_id):
     latest_questions = Question.objects.get(pk = question_id)
     right_ans = Answer2.objects.get(choice = latest_questions)
-    
+
     try:
         selected_choice= latest_questions.choice_set.get(pk= request.POST['choice'])
-        
+
 
     except(KeyError, Choice.DoesNotExist):
         return render(request, "polls/answ.html", {
@@ -57,7 +57,7 @@ def vote(request, question_id):
             'error_massage': 'No elegiste una respuesta',
         })
 
-    else: 
+    else:
         if selected_choice.choice_text == right_ans.answer_text:
             return render ( request, 'polls/results.html')
         else:
