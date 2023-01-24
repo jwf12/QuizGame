@@ -13,7 +13,7 @@ def index (request):
 
 
 
-class DetailView(generic.DetailView):
+class QuestionDetailView(generic.DetailView):
     model = Question
     template_name = "polls/answ.html"
     context_object_name = 'latest_questions'
