@@ -7,8 +7,8 @@ from django.views import generic
 
 def index (request):
     contexto = {}
-    n = Question.objects.all()
-    contexto['latest_questions'] = n
+    questions = Question.objects.all()
+    contexto['latest_questions'] = questions
     return render(request, 'polls/index.html', contexto)
 
 
