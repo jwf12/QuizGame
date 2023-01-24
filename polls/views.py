@@ -45,8 +45,6 @@ def vote(request, question_id):
 
     try:
         selected_choice= latest_questions.choice_set.get(pk= request.POST['choice'])
-
-
     except(KeyError, Choice.DoesNotExist):
         return render(request, "polls/answ.html", {
             'latest_questions': latest_questions,
@@ -55,6 +53,6 @@ def vote(request, question_id):
 
     else:
         if selected_choice.choice_text == right_ans.answer_text:
-            return render ( request, 'polls/results.html')
+            return redirect('polls:results', question_id=question_id)
         else:
             return HttpResponseRedirect(reverse('polls:index'))
