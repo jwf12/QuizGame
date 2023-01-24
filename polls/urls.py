@@ -8,5 +8,5 @@ urlpatterns = [
     path('', views.index, name = 'index'),
     path('<int:pk>/', views.QuestionDetailView.as_view(), name='numPreg'),
     path('<question_id>/vote/', views.vote, name='vote'),
-    # path('<question_id>/results', views.results, name='results'),
+    path('<question_id>/results/', views.results, name='results'),
 ]

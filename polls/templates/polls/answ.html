@@ -34,9 +34,7 @@
 
 </div>
 
-{% endblock %}
-
-{% comment %} {% if latest_ans %}
+{% if latest_ans %}
 
     <h1>{{latest_questions.question_text}}</h1>
 
@@ -44,4 +42,6 @@
         <li><a href="{% url 'polls:numPreg' choice%}}">{{choice.choice_text}}</a></li>
     {% endfor %}
 
-{% endif %} {% endcomment %}
+{% endif %}
+
+{% endblock %}
