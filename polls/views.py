@@ -59,6 +59,6 @@ def vote(request, question_id):
 
 def category(request, category_id):
     context = {
-        'categories': get_object_or_404(Category, id=category_id),
+        'category': get_object_or_404(Category, id=category_id),
     }
     return render(request, 'polls/category.html', context=context)
