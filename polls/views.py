@@ -31,11 +31,11 @@ def category_detail(request, category_id):
 
 def results(request, question_id):
     contexto = {}
-    latest_questions = Question.objects.get(pk = question_id)
+    latest_questions = Question.objects.get(pk=question_id)
     contexto['latest_questions'] = latest_questions
 
-    c= Choice.objects.filter(question = latest_questions)
-    contexto['latest_ans'] = c
+    latest_answer= Choice.objects.filter(question=latest_questions)
+    contexto['latest_ans'] = latest_answer
     return render(request, 'polls/results.html', contexto)
 
 
