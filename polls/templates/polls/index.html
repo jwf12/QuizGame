@@ -7,7 +7,7 @@
     <h1>Categorías:</h1>
     {% if all_category %}
         {% for category in all_category %}
-            <li><a href="{%url 'polls:numPreg' category.id%}">{{category.category_text}}</a></li>
+            <li><a href="{%url 'polls:questions' category.id%}">{{category.category_text}}</a></li>
         {% endfor %}
     {% endif %} 
     </div>

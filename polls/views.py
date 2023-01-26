@@ -43,7 +43,7 @@ def vote(request, question_id):
     right_ans = Answer2.objects.get(choice = latest_questions)
     
     try:
-        selected_choice= latest_questions.choice_set.get(pk= request.POST['choice'])
+        selected_choice = latest_questions.choice_set.get(pk = request.POST['choice'])
         
     except(KeyError, Choice.DoesNotExist):
         return render(request, "polls/answ.html", {
@@ -52,7 +52,7 @@ def vote(request, question_id):
         })
 
     else: 
-        if selected_choice.choice_text == right_ans.answer_text:
-            return render ( request, 'polls/results.html')
-        else:
-            return HttpResponseRedirect(reverse('polls:index'))
+        # if selected_choice.choice_text == right_ans.answer_text:
+            return render(request, 'polls/results.html')
+        # else:
+        #     return render(request, 'polls/results.html')

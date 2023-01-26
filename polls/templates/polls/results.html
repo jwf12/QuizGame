@@ -4,8 +4,14 @@
 {% block content %}
 <div class="questions_main"> 
     <h1>{{ question.question_text }}</h1>
-    <p>Respuesta correcta!</p>
-    <a href="{%    url 'polls:index'  %}">Volver a las preguntas</a>
+    
+    {% if selected_choice.choice_text == right_ans.answer_text %}
+        <p>Respuesta correcta!</p>
+    {% else %}
+        <p>respuesta incorrecta</p>
+    {% endif %}
+
+    <a href="{% url 'polls:index' %}">Volver a las preguntas</a>
 </div>
 {% endblock content %}
 
