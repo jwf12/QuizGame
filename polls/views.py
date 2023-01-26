@@ -5,12 +5,11 @@ from django.urls import reverse
 from django.views import generic
 
 
-def index (request):
+def index(request):
     contexto = {}
-    n = Category.objects.all()
-    contexto['all_category'] = n
+    all_category = Category.objects.all()
+    contexto['all_category'] = all_category
     return render(request, 'polls/index.html', contexto)
-
 
 
 # class DetailView(generic.DetailView):
@@ -19,17 +18,14 @@ def index (request):
 #     context_object_name = 'latest_questions'
 
 
-
-def detailView (request, category_id):
+def question_detail_view(request, category_id):
     contexto = {}
     selected_category = Category.objects.get(pk = category_id)
     contexto['selected_category'] = selected_category
 
-    c= Question.objects.filter(category = selected_category)
-    contexto['cat_questions'] = c
+    cat_questions= Question.objects.filter(category = selected_category)
+    contexto['cat_questions'] = cat_questions
     return render(request, 'polls/answ.html', contexto)
-
-
 
 
 # def results (request, question_id):
@@ -42,7 +38,6 @@ def detailView (request, category_id):
 #     return render(request, 'polls/results.html', contexto)
     
 
-
 def vote(request, question_id):
     latest_questions = Question.objects.get(pk = question_id)
     right_ans = Answer2.objects.get(choice = latest_questions)
@@ -50,7 +45,6 @@ def vote(request, question_id):
     try:
         selected_choice= latest_questions.choice_set.get(pk= request.POST['choice'])
         
-
     except(KeyError, Choice.DoesNotExist):
         return render(request, "polls/answ.html", {
             'latest_questions': latest_questions,

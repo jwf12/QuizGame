@@ -1,62 +1,42 @@
+{% extends 'base.html' %}
 
-{% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <title>Opciones</title>
-</head>
-<body>
-    
-    {% for question in cat_questions %}
-        <div class="question_container"> 
-        <form action="{% url 'polls:vote' latest_questions.id%}" method='post'>{% csrf_token %}
-            <h1>{{latest_questions.question_text}}</h1>
-            <fieldset>
+  
+{% block content %}
+{% for question in cat_questions %}
+<div class="question_container"> 
+    <form action="{% url 'polls:vote' question.id%}" method='post'>{% csrf_token %}
+        <h1>{{question.question_text}}</h1>
+        <fieldset>
 
                 
-                {% if error_massage %}
-                    <p><strong>{{error_massage}}</strong></p>
-                {% endif %}
+            {% if error_massage %}
+                <p><strong>{{error_massage}}</strong></p>
+            {% endif %}
 
 
-                {% for choice in latest_questions.choice_set.all %}
+            {% for choice in question.choice_set.all %}
                 
-                <input 
-                    type="radio"
-                    name="choice"
-                    id="choice{{forloop.counter}}"
-                    value="{{choice.id}}"
-                >
-                <label for="choice{{forloop.counter}}">
-                    {{choice.choice_text}}
-                </label>
-                <br>
+            <input 
+                type="radio"
+                name="choice"
+                id="choice{{forloop.counter}}"
+                value="{{choice.id}}"
+            >
+            <label for="choice{{forloop.counter}}">
+                {{choice.choice_text}}
+            </label>
+            <br>
 
-                {% endfor %}
-            </fieldset>
-            <input type="submit" value="Votar">
-        </form>
-    {% endfor %}
+            {% endfor %}
+        </fieldset>
+        <input type="submit" value="Votar">
+    </form>
+{% endfor %}
+  
 </div>
-</body>
-</html>
+{% endblock content %}  
 
 
 
 
-
-
-{% comment %} {% if latest_ans %}
-
-    <h1>{{latest_questions.question_text}}</h1>
-
-    {% for choice in latest_ans %}
-        <li><a href="{% url 'polls:numPreg' choice%}}">{{choice.choice_text}}</a></li>
-    {% endfor %}
-
-{% endif %} {% endcomment %}

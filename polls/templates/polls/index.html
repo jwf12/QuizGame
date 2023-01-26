@@ -1,26 +1,15 @@
-{%load static%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <title>Votaciones</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+
+{% block content %}
 <div class="question_container">   
-  
     <div class= "questions_main">   
-    <h1>Categorias:</h1>
-
-        {% if all_category %}
-            {% for category in all_category %}
-                <li><a href="{%url 'polls:numPreg' category.id%}">{{category.category_text}}</a></li>
-            {% endfor %}
-
-        {% endif %}
+    <h1>Categorías:</h1>
+    {% if all_category %}
+        {% for category in all_category %}
+            <li><a href="{%url 'polls:numPreg' category.id%}">{{category.category_text}}</a></li>
+        {% endfor %}
+    {% endif %} 
     </div>
-</div> 
-</body>
-</html>
+</div>
+{% endblock %}
