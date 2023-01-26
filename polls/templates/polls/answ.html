@@ -8,15 +8,13 @@
     <form action="{% url 'polls:vote' question.id%}" method='post'>{% csrf_token %}
         <h1>{{question.question_text}}</h1>
         <fieldset>
-
-                
+                   
             {% if error_massage %}
                 <p><strong>{{error_massage}}</strong></p>
             {% endif %}
 
 
-            {% for choice in question.choice_set.all %}
-                
+            {% for choice in question.choice_set.all %}    
             <input 
                 type="radio"
                 name="choice"
@@ -27,8 +25,8 @@
                 {{choice.choice_text}}
             </label>
             <br>
-
             {% endfor %}
+
         </fieldset>
         <input type="submit" value="Votar">
     </form>
