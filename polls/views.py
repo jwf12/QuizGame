@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import Question, Choice, Answer2, Category
 from django.urls import reverse
 from django.views import generic
+from django.shortcuts import redirect
 
 
 def index(request):
@@ -41,17 +42,26 @@ def question_detail_view(request, category_id):
 def vote(request, question_id):
     latest_questions = Question.objects.get(pk = question_id)
     right_ans = Answer2.objects.get(choice = latest_questions)
-    
-    try:
-        selected_choice = latest_questions.choice_set.get(pk = request.POST['choice'])   
-    except(KeyError, Choice.DoesNotExist):
-        return render(request, "polls/answ.html", {
-            'latest_questions': latest_questions,
-            'error_massage': 'No elegiste una respuesta',
-        })
 
-    else: 
-        if selected_choice.choice_text == right_ans.answer_text:
-            return render(request, 'polls/results.html')
-        else:
-            return render(request, 'polls/results.html') # Posible solution add other html
+    if request.method == 'POST':
+        choice = request.POST.get('choice', None)
+        if not choice:
+            # if the user doesn't select a choice
+            context = {
+            'question': latest_questions,
+            'error_massage': 'No elegiste una respuesta',
+            }
+            return render(request, 'polls/results.html', context=context)
+
+        # if there is a selected choice
+        # here we can use get_object_or_404()
+        selected_choice = latest_questions.choice_set.get(pk=choice)
+
+        context = {
+            'question': latest_questions,
+            'right_ans': right_ans,
+            'selected_choice': selected_choice,
+        }
+        return render(request, 'polls/results.html', context=context)
+    # if it's a get request
+    return redirect('polls:index')
