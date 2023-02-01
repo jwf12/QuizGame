@@ -1,18 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
 
 
 {% block content %}
+
 <div class="questions_main"> 
-    <h1>{{ question.question_text }}</h1>
-    
-    {% if selected_choice.choice_text == right_ans.answer_text %}
+    <h1>{{ latest_question.question_text }}</h1>
+
+    {% if error_massage %}
+        <p><strong>{{error_massage}}</strong></p>
+        
+    {% elif selected_choice.choice_text == right_ans.answer_text %}
         <p>Respuesta correcta!</p>
+
     {% else %}
         <p>respuesta incorrecta</p>
+
     {% endif %}
 
-    <a href="{% url 'polls:index' %}">Volver a las preguntas</a>
+    {% if paginator.has_next %}{% comment %} This is not working because it's not the same paginator from answ.html {% endcomment %}
+        <a href="?page={{paginator.next_page_number}}"> Siguiente</a>
+    {% endif %}
+
+    <a href="{% url 'polls:index' %}">Volver a las categorias</a>
 </div>
+
 {% endblock content %}
 
 
